@@ -54,9 +54,9 @@ public class Interfaz extends javax.swing.JFrame{
         Errores_txt = new javax.swing.JTextField();
         Resultados_txt = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        Codigo_txt = new javax.swing.JEditorPane();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Codigo_txt = new compilador.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
         Abrir = new javax.swing.JMenuItem();
@@ -97,9 +97,9 @@ public class Interfaz extends javax.swing.JFrame{
             .addGap(0, 337, Short.MAX_VALUE)
         );
 
-        jScrollPane2.setViewportView(Codigo_txt);
-
         jLabel1.setText("Código a Compilar");
+
+        jScrollPane1.setViewportView(Codigo_txt);
 
         File.setText("Archivo");
 
@@ -161,8 +161,8 @@ public class Interfaz extends javax.swing.JFrame{
                     .addComponent(Resultados)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
@@ -173,14 +173,14 @@ public class Interfaz extends javax.swing.JFrame{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Sint_p)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1)))
+                .addGap(18, 18, 18)
                 .addComponent(Resultados, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -277,7 +277,7 @@ public class Interfaz extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Abrir;
     private javax.swing.JMenuItem Cerrar;
-    private javax.swing.JEditorPane Codigo_txt;
+    private compilador.JTextField Codigo_txt;
     private javax.swing.JTextField Errores_txt;
     private javax.swing.JMenu File;
     private javax.swing.JMenuItem Guardar;
@@ -296,6 +296,6 @@ public class Interfaz extends javax.swing.JFrame{
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
