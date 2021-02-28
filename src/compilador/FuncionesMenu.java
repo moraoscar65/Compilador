@@ -20,9 +20,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class FuncionesMenu {
     private JFileChooser accion = null;
     private File archivo = null;
-    public static String ruta = "";
-    
+    public String ruta = "";
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public void FuncionesMenu(){
+        
         
     }
     
@@ -49,13 +50,9 @@ public class FuncionesMenu {
                     while ((Slinea = leeArchivo.readLine()) != null) {
                         /*Imprime la linea leida*/
                         datos = datos + Slinea + "\n";
-                        
                     }
-                    
                     /*Cierra el flujo*/
                     leeArchivo.close();
-                    
-                    
                 } else {
                     System.out.println("Fichero No Existe");
                     return "No se encontro el archivo";
@@ -65,6 +62,7 @@ public class FuncionesMenu {
                 System.out.println(ex.getMessage());
             }
         }
+        ArchivoConfirguracion();
         return datos;
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -88,6 +86,7 @@ public class FuncionesMenu {
             //Captura un posible error le imprime en pantalla 
             System.out.println(ex.getMessage());
         }
+        ArchivoConfirguracion();
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public void CrearArchivo(javax.swing.JEditorPane Codigo_txt, String Cont){
@@ -95,8 +94,8 @@ public class FuncionesMenu {
         accion.setFileSelectionMode(0);
         FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("TXT", "txt");
         accion.setFileFilter(filtroImagen);
-        //accion.setDialogTitle("Guardar archivo " + nombre);
-        //accion.setSelectedFile(new File(nombre));
+        accion.setDialogTitle("Guardar archivo " + ".txt");
+        accion.setSelectedFile(new File(".txt"));
         if (accion.showSaveDialog(Codigo_txt) == JFileChooser.APPROVE_OPTION) {
             ruta = accion.getSelectedFile().toString();
             archivo = new File(ruta);
@@ -117,8 +116,79 @@ public class FuncionesMenu {
             } catch (Exception ex) {
             }
         }
+        ArchivoConfirguracion();
+    }
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    public void CerrarArchivo(){
+        ruta="";
+        ArchivoConfirguracion();
+    }
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    public void ArchivoConfirguracion(){
+        File conf=new File ("config.txt");
+        try{
+            if (conf.exists()) {
+                conf.delete();
+            }
+            BufferedWriter wr = new BufferedWriter(new FileWriter(conf));
+                FileWriter escribirArchivo = new FileWriter(conf, true);
+                BufferedWriter buffer = new BufferedWriter(escribirArchivo);
+                buffer.write(ruta);
+                //buffer.newLine();
+                buffer.close();
+                wr.close();
+                escribirArchivo.close();
+        }catch (Exception ex) {
+        }
+    }
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    public String LeerConfiguracion(){
+        System.out.println("leer conf");
+        String linea="";
+        try{
+        File conf = new File ("config.txt");
+        FileReader fr = new FileReader(conf);
+        BufferedReader br = new BufferedReader(fr);
+
+            while((linea=br.readLine())!=null){
+                System.out.println(linea);
+                ruta=linea;
+                return linea;
+                
+            }
+            
+            
+        }catch (Exception ex) { 
+        }
+        return linea;
         
     }
-    
-    
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    public String DatosConfiguracion(String url){
+        String linea="",cont="";
+        if(url!=null){
+            System.out.println("datos conf");
+            System.out.println(url);
+            File datos= new File(url);
+
+            try{
+
+                FileReader fr = new FileReader(datos);
+                BufferedReader br = new BufferedReader(fr);
+
+                while((linea=br.readLine())!=null){
+                    cont+=linea;
+                    cont+="\n";
+                    System.out.println(linea);
+                }
+
+            }catch (Exception ex) { 
+            }
+        }
+        
+        return cont;
+        
+    }
 }
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

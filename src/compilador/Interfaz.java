@@ -21,11 +21,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Interfaz extends javax.swing.JFrame{
     public int bandera=0;
+    private String contenido="";
     /**
      * Creates new form Interfaz
      */
     public Interfaz() {
+        
         initComponents();
+        inicializar();
+        System.out.println("constructor "+contenido);
+        Codigo_txt.setText(contenido); 
+        
+        this.revalidate();
+        this.repaint();
     }
 
     /**
@@ -54,6 +62,7 @@ public class Interfaz extends javax.swing.JFrame{
         Abrir = new javax.swing.JMenuItem();
         Guardar = new javax.swing.JMenuItem();
         GuardarComo = new javax.swing.JMenuItem();
+        Cerrar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -118,6 +127,14 @@ public class Interfaz extends javax.swing.JFrame{
         });
         File.add(GuardarComo);
 
+        Cerrar.setText("Cerrar");
+        Cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CerrarActionPerformed(evt);
+            }
+        });
+        File.add(Cerrar);
+
         jMenuBar1.add(File);
 
         jMenu2.setText("Editar");
@@ -179,11 +196,18 @@ public class Interfaz extends javax.swing.JFrame{
         FuncionesMenu abrir=new FuncionesMenu();
         String contenido=abrir.AbrirArchivo(Codigo_txt);
         Codigo_txt.setText(contenido);
+        bandera=1;
     }//GEN-LAST:event_AbrirActionPerformed
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        if(bandera==1){
         FuncionesMenu guardar= new FuncionesMenu();
-        guardar.GuardarArchivo(Codigo_txt.getText());  
+        guardar.GuardarArchivo(Codigo_txt.getText());}
+        else{
+            FuncionesMenu crear=new FuncionesMenu();
+            crear.CrearArchivo(Codigo_txt,Codigo_txt.getText());
+            bandera=1;
+        }
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void GuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarComoActionPerformed
@@ -191,10 +215,18 @@ public class Interfaz extends javax.swing.JFrame{
        crear.CrearArchivo(Codigo_txt,Codigo_txt.getText());
     }//GEN-LAST:event_GuardarComoActionPerformed
 
+    private void CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarActionPerformed
+        Codigo_txt.setText("");
+        FuncionesMenu cerrar= new FuncionesMenu();
+        cerrar.CerrarArchivo();
+        bandera=0;
+    }//GEN-LAST:event_CerrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -222,11 +254,21 @@ public class Interfaz extends javax.swing.JFrame{
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Interfaz().setVisible(true);
+                
             }
         });
         
         
+         
+    }
+    public void inicializar(){
+        System.out.println("inicializar");
+        FuncionesMenu archivoConfiguracion=new FuncionesMenu();
+        String ruta=archivoConfiguracion.LeerConfiguracion();
+        contenido=archivoConfiguracion.DatosConfiguracion(ruta);
         
+        System.out.println("termino");
+       
     }
     
    
@@ -234,6 +276,7 @@ public class Interfaz extends javax.swing.JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Abrir;
+    private javax.swing.JMenuItem Cerrar;
     private javax.swing.JEditorPane Codigo_txt;
     private javax.swing.JTextField Errores_txt;
     private javax.swing.JMenu File;
