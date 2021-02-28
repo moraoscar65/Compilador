@@ -5,12 +5,22 @@
  */
 package compilador;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Jorge-PC
  */
-public class Interfaz extends javax.swing.JFrame {
-
+public class Interfaz extends javax.swing.JFrame{
+    public int bandera=0;
     /**
      * Creates new form Interfaz
      */
@@ -41,6 +51,9 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
+        Abrir = new javax.swing.JMenuItem();
+        Guardar = new javax.swing.JMenuItem();
+        GuardarComo = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -80,6 +93,31 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel1.setText("Código a Compilar");
 
         File.setText("Archivo");
+
+        Abrir.setText("Abrir");
+        Abrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AbrirActionPerformed(evt);
+            }
+        });
+        File.add(Abrir);
+
+        Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
+        File.add(Guardar);
+
+        GuardarComo.setText("Guardar Como");
+        GuardarComo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarComoActionPerformed(evt);
+            }
+        });
+        File.add(GuardarComo);
+
         jMenuBar1.add(File);
 
         jMenu2.setText("Editar");
@@ -137,6 +175,22 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Lexico_txtActionPerformed
 
+    private void AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirActionPerformed
+        FuncionesMenu abrir=new FuncionesMenu();
+        String contenido=abrir.AbrirArchivo(Codigo_txt);
+        Codigo_txt.setText(contenido);
+    }//GEN-LAST:event_AbrirActionPerformed
+
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        FuncionesMenu guardar= new FuncionesMenu();
+        guardar.GuardarArchivo(Codigo_txt.getText());  
+    }//GEN-LAST:event_GuardarActionPerformed
+
+    private void GuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarComoActionPerformed
+       FuncionesMenu crear=new FuncionesMenu();
+       crear.CrearArchivo(Codigo_txt,Codigo_txt.getText());
+    }//GEN-LAST:event_GuardarComoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -171,15 +225,20 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
         
-       
         
         
     }
+    
+   
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Abrir;
     private javax.swing.JEditorPane Codigo_txt;
     private javax.swing.JTextField Errores_txt;
     private javax.swing.JMenu File;
+    private javax.swing.JMenuItem Guardar;
+    private javax.swing.JMenuItem GuardarComo;
     private javax.swing.JTextField Inter_txt;
     private javax.swing.JTextField Lexico_txt;
     private javax.swing.JTabbedPane Resultados;
