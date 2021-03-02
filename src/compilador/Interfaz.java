@@ -45,10 +45,10 @@ public class Interfaz extends javax.swing.JFrame {
         this.repaint();
 
         
-        Codigo_txt.setLayout(new BorderLayout());
+        /*Codigo_txt.setLayout(new BorderLayout());
         lines =new LineasText();
         Codigo_txt.add(lines,BorderLayout.WEST);
-        Codigo_txt.add(lines.scrollPane,BorderLayout.CENTER);
+        Codigo_txt.add(lines.scrollPane,BorderLayout.CENTER);*/
         
         Formato1.setLayout(new BorderLayout());
         lines2= new LineasText();
@@ -308,12 +308,13 @@ public class Interfaz extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(14, 14, 14)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(noFila)
-                            .addComponent(jLabel3)
-                            .addComponent(noCol)
-                            .addComponent(compilar))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(compilar)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1)
+                                .addComponent(noFila)
+                                .addComponent(jLabel3)
+                                .addComponent(noCol)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(Resultados, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -434,7 +435,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JTextField Errores_txt;
     private javax.swing.JMenu File;
     private javax.swing.JTabbedPane Formato;
-    private javax.swing.JPanel Formato1;
+    public javax.swing.JPanel Formato1;
     private javax.swing.JMenuItem Guardar;
     private javax.swing.JMenuItem GuardarComo;
     private javax.swing.JTextField Inter_txt;
